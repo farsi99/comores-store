@@ -1,15 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Products } from 'src/app/model/products';
+import { ProductsService } from 'src/app/service/products.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent implements OnInit,OnDestroy {
 
-  constructor() { }
+  products:Products[];
+  prodSub: Subscription;
+  prefUrlImage=`${environment.prefUrlImage}`;
+
+  constructor(private prodService:ProductsService) { }
 
   ngOnInit(): void {
+    this.prodSub = this.prodService.productSubject
+    .subscribe((data)=>{
+      this.products = data;
+
+    });
+  }
+
+  ngOnDestroy(){
+    this.prodSub.unsubscribe();
   }
 
 }
