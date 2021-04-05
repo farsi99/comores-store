@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ProductsComponent implements OnInit,OnDestroy {
 
-  products:Products[];
+  products:Products[]=[];
   prodSub: Subscription;
   prefUrlImage=`${environment.prefUrlImage}`;
 
@@ -21,8 +21,9 @@ export class ProductsComponent implements OnInit,OnDestroy {
     this.prodSub = this.prodService.productSubject
     .subscribe((data)=>{
       this.products = data;
-
     });
+    //On emet les données
+    this.prodService.emitProduct();
   }
 
   ngOnDestroy(){

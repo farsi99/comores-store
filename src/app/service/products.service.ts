@@ -11,7 +11,7 @@ import { Result } from '../model/result';
 export class ProductsService {
 
   products: Products[] = [];
-  productSubject = new Subject<any[]>();
+  productSubject = new Subject<Products[]>();
 
   constructor(private http: HttpClient) {
     this.getProductFromServer();

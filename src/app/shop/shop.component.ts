@@ -8,7 +8,7 @@ import { ProductsService } from '../service/products.service';
   templateUrl: './shop.component.html',
   styleUrls: ['./shop.component.css']
 })
-export class ShopComponent implements OnInit, OnDestroy {
+export class ShopComponent implements OnInit {
 
   products:Products[];
   prodSub: Subscription;
@@ -16,14 +16,7 @@ export class ShopComponent implements OnInit, OnDestroy {
   constructor(private prodService:ProductsService) { }
 
   ngOnInit(): void {
-    this.prodSub = this.prodService.productSubject
-    .subscribe((data)=>{
-      this.products = data;
 
-    });
   }
 
-  ngOnDestroy(){
-    this.prodSub.unsubscribe();
-  }
 }
