@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgxPayPalModule } from 'ngx-paypal';
 
 
 import { AppComponent } from './app.component';
@@ -22,6 +23,7 @@ import { ModalAddCartComponent } from './shop/modal-add-cart/modal-add-cart.comp
 import { ModalQuickViewComponent } from './shop/modal-quick-view/modal-quick-view.component';
 import { CheckoutComponent } from './shop/checkout/checkout.component';
 import { AuthGuard } from './service/auth.guard';
+import { ButtonPaypalComponent } from './shop/button-paypal/button-paypal.component';
 
 export const routes:Routes=[
   {path:'home', component:HomeComponent},
@@ -56,13 +58,15 @@ export const routes:Routes=[
     CategoryComponent,
     ModalAddCartComponent,
     ModalQuickViewComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    ButtonPaypalComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPayPalModule
   ],
   providers: [],
   bootstrap: [AppComponent]
