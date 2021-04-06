@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Products } from 'src/app/model/products';
 import { ProductsService } from 'src/app/service/products.service';
@@ -9,10 +9,10 @@ import { environment } from 'src/environments/environment';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
-export class ProductsComponent implements OnInit,OnDestroy {
+export class ProductsComponent implements OnInit {
 
-  products:Products[]=[];
-  prodSub: Subscription;
+  @Input() products:Products[]=[];
+  @Input() isPaginate:boolean=true;
   prefUrlImage=`${environment.prefUrlImage}`;
   currentPage:number =0;
   pages=[];
@@ -22,13 +22,6 @@ export class ProductsComponent implements OnInit,OnDestroy {
   }
 
   ngOnInit(): void {
-    this.prodSub = this.prodService.productSubject
-    .subscribe((data)=>{
-     // this.products = data;
-     this.products = this.prodService.getProductByPage(this.currentPage);
-    });
-    //On emet les données
-    this.prodService.emitProduct();
   }
 
   //Au clique d'un numero de page
@@ -57,10 +50,6 @@ export class ProductsComponent implements OnInit,OnDestroy {
       this.products = prod;
       this.currentPage = newCurrentPage;
     }
-  }
-
-  ngOnDestroy(){
-    this.prodSub.unsubscribe();
   }
 
 }

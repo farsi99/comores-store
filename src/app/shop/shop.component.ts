@@ -12,10 +12,18 @@ export class ShopComponent implements OnInit {
 
   products:Products[];
   prodSub: Subscription;
+  currentPage:number =0;
 
   constructor(private prodService:ProductsService) { }
 
   ngOnInit(): void {
+    this.prodSub = this.prodService.productSubject
+    .subscribe((data)=>{
+     // this.products = data;
+     this.products = this.prodService.getProductByPage(this.currentPage);
+    });
+    //On emet les données
+    this.prodService.emitProduct();
 
   }
 

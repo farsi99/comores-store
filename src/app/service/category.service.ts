@@ -26,7 +26,6 @@ export class CategoryService {
       (response:Result)=>{
       if(response.status == 200){
         this.categories = response.result;
-        console.log('caty:', this.categories);
         this.emitCategories();
       }else{
         console.log(response.message);
