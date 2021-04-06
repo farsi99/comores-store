@@ -20,6 +20,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { CategoryComponent } from './category/category.component';
 import { ModalAddCartComponent } from './shop/modal-add-cart/modal-add-cart.component';
 import { ModalQuickViewComponent } from './shop/modal-quick-view/modal-quick-view.component';
+import { CheckoutComponent } from './shop/checkout/checkout.component';
+import { AuthGuard } from './service/auth.guard';
 
 export const routes:Routes=[
   {path:'home', component:HomeComponent},
@@ -29,7 +31,7 @@ export const routes:Routes=[
   {path:'single-product/:id', component:SingleProductComponent},
   {path:'login', component:LoginComponent},
   {path:'register', component:RegisterComponent},
- // {path:'checkout', canActivate:[AuthGuard], component:CheckoutComponent},
+  {path:'checkout', canActivate:[AuthGuard], component:CheckoutComponent},
   {path:'category/:id', component:CategoryComponent},
   {path:'NotFound', component:NotFoundComponent},
   {path:'products', component:ProductsComponent},
@@ -53,7 +55,8 @@ export const routes:Routes=[
     NotFoundComponent,
     CategoryComponent,
     ModalAddCartComponent,
-    ModalQuickViewComponent
+    ModalQuickViewComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
