@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Products } from 'src/app/model/products';
+import { CartService } from 'src/app/service/cart.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -12,9 +13,15 @@ export class ModalQuickViewComponent implements OnInit {
   @Input() products:Products[];
   prefUrlImage=`${environment.prefUrlImage}`;
 
-  constructor() { }
+  constructor(private cartService:CartService) { }
 
   ngOnInit(): void {
   }
+
+
+  addToCart(product:Products):void{
+    this.cartService.addProductToCard(product);
+  }
+
 
 }

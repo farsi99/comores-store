@@ -1,6 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Products } from 'src/app/model/products';
+import { CartService } from 'src/app/service/cart.service';
 import { ProductsService } from 'src/app/service/products.service';
 import { environment } from 'src/environments/environment';
 
@@ -17,7 +18,7 @@ export class ProductsComponent implements OnInit {
   currentPage:number =0;
   pages=[];
 
-  constructor(private prodService:ProductsService) {
+  constructor(private prodService:ProductsService, private cartService:CartService) {
     this.pages = this.prodService.pages;
   }
 
@@ -50,6 +51,10 @@ export class ProductsComponent implements OnInit {
       this.products = prod;
       this.currentPage = newCurrentPage;
     }
+  }
+
+  addToCart(product:Products):void{
+    this.cartService.addProductToCard(product);
   }
 
 }

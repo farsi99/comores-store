@@ -1,4 +1,4 @@
-<div class="modal fade theme1 style1" *ngFor="let product of products" [id]="'quick-view-'+product.idProduct" tabindex="-1" role="dialog">
+<div class="modal fade theme1 style1" *ngFor="let product of products" [id]="'quick-view'+product.idProduct" tabindex="-1" role="dialog">
   <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
           <div class="modal-header">
@@ -42,7 +42,7 @@
                               <div class="product-count style d-flex flex-column flex-sm-row my-4">
 
                                   <div>
-                                      <button class="btn theme-btn--dark1 btn--xl mt-5 mt-sm-0 rounded-5" data-dismiss="modal">
+                                      <button class="btn theme-btn--dark1 btn--xl mt-5 mt-sm-0 rounded-5" data-dismiss="modal" (click)="addToCart(product)">
                                   <span class="mr-2"><i class="ion-android-add" ></i></span>
                                   Ajouter au panier
                               </button>
