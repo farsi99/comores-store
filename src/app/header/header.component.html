@@ -114,7 +114,11 @@
 
                       <li routerLinkActive="active"><a routerLink="/home">Accueil</a></li>
                       <li routerLinkActive="active"><a routerLink="/shop">Boutique</a></li>
-                      <li routerLinkActive="active"><a>Categorie</a></li>
+                      <li routerLinkActive="active"><a>Categorie</a>
+                        <ul class="sub-menu">
+                          <li *ngFor="let category of categories"><a [routerLink]="['/category',category.idCategory]">{{category.name}}</a></li>
+                        </ul>
+                      </li>
                       <li routerLinkActive="active"><a routerLink="/contact">Contact</a></li>
                       <li routerLinkActive="active"><a routerLink="/login">Connexion</a></li>
                       <li routerLinkActive="active"><a routerLink="/register">Inscription</a></li>

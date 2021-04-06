@@ -15,15 +15,15 @@ export class ProductsService {
 
   constructor(private http: HttpClient) {
     this.getProductFromServer();
-   }
+  }
 
 
   /**
    * Emission des données après recuperation de l'observable
   */
- emitProduct(){
-   this.productSubject.next(this.products);
- }
+  emitProduct() {
+    this.productSubject.next(this.products);
+  }
 
   /**
    * Methode qui recupere les données depuis le serveur
@@ -40,6 +40,20 @@ export class ProductsService {
         console.log('Erreur:', dataProduct.message);
       }
     });
+  }
+
+  /**
+   * Cette méthode traite l'affichage d'un produit
+   * @param int id
+   * @author Farouk
+  */
+  getProductById(id: number) {
+    const product = this.products.find(element => element.idProduct == id);
+    if(product){
+      return product;
+    }else{
+      return null;
+    }
   }
 
 }
