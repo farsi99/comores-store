@@ -12,6 +12,10 @@ export class ProductsService {
 
   products: Products[] = [];
   productSubject = new Subject<Products[]>();
+  pages = [];
+  limit:number = 9;
+  numberTotalOfPage:number;
+
 
   constructor(private http: HttpClient) {
     this.getProductFromServer();
@@ -34,6 +38,11 @@ export class ProductsService {
     this.http.get(url).subscribe((dataProduct: Result) => {
       if (dataProduct.status == 200) {
         this.products = dataProduct.result;
+        //On compte le nombre de page
+        this.numberTotalOfPage = this.products.length/this.limit; //Nombre total de page
+        for(let i=0; i< this.numberTotalOfPage; i++){
+          this.pages.push(i);
+        }
         console.log('donnes service:', dataProduct);
         this.emitProduct();
       } else {
@@ -55,5 +64,20 @@ export class ProductsService {
       return null;
     }
   }
+
+
+  /**
+   * Methode qui retourne les produits en fonction de la page
+  */
+ getProductByPage(numberPage:number):Products[]{
+
+  if(numberPage>0 || numberPage < this.numberTotalOfPage){
+    const prodResult = this.products.slice(numberPage*this.limit, (numberPage+1)*this.limit );
+    return prodResult;
+  }else{
+    return null;
+  }
+
+ }
 
 }

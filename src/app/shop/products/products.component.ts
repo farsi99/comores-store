@@ -14,16 +14,49 @@ export class ProductsComponent implements OnInit,OnDestroy {
   products:Products[]=[];
   prodSub: Subscription;
   prefUrlImage=`${environment.prefUrlImage}`;
+  currentPage:number =0;
+  pages=[];
 
-  constructor(private prodService:ProductsService) { }
+  constructor(private prodService:ProductsService) {
+    this.pages = this.prodService.pages;
+  }
 
   ngOnInit(): void {
     this.prodSub = this.prodService.productSubject
     .subscribe((data)=>{
-      this.products = data;
+     // this.products = data;
+     this.products = this.prodService.getProductByPage(this.currentPage);
     });
     //On emet les données
     this.prodService.emitProduct();
+  }
+
+  //Au clique d'un numero de page
+  changePage(numberPage:number):void{
+    const prod = this.prodService.getProductByPage(numberPage);
+    if(prod){
+      this.products = prod;
+      this.currentPage = numberPage;
+    }
+  }
+
+  nextPage():void{
+    const newCurrentPage = this.currentPage+1;
+    const prod = this.prodService.getProductByPage(newCurrentPage);
+    if(prod){
+      this.products = prod;
+      this.currentPage = newCurrentPage;
+
+    }
+  }
+
+  prevPage():void{
+    const newCurrentPage = this.currentPage-1;
+    const prod = this.prodService.getProductByPage(newCurrentPage);
+    if(prod){
+      this.products = prod;
+      this.currentPage = newCurrentPage;
+    }
   }
 
   ngOnDestroy(){
